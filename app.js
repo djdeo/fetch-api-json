@@ -4,7 +4,7 @@ function getJson() {
     fetch('posts.json')
         .then(res => res.json())
         .then(data => {
-            let main = '', date = '', output = '';
+            let main = '', date = '';
             data.forEach(function(post) {
                 main += `
 				<div>
