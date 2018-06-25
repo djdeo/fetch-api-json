@@ -1,21 +1,59 @@
-document.querySelector("button").addEventListener('click', getJson)
 
-function getJson() {
-    fetch('posts.json')
-        .then(res => res.json())
-        .then(data => {
-            let main = '', date = '';
-            data.forEach(function(post) {
-                main += `
-				<div>
-					<h3>${post.title}</h3>
-					<p>${post.body}</p>
-				</div>
-				`;
-            });
-            console.log(data);
-            date = `<p><i><b>Last modified</b>: ${data[0].date}</i></p>`;
-            document.querySelector("#output").innerHTML = main + date;
-        })
-        .catch(err => console.log(err));
+// Load Customers
+function loadCustomers(e) {
+  const xhr = new XMLHttpRequest();
+
+  xhr.open('GET', 'customers.json', true);
+
+  xhr.onload = function(){
+    if(this.status === 200) {
+      // console.log(this.responseText);
+
+      const customers = JSON.parse(this.responseText);
+
+      let output = '';
+
+      customers.forEach(function(customer){
+        output += `
+        <ul>
+          <li>ID: ${customer.id}</li>
+          <li>Name: ${customer.name}</li>
+          <li>Company: ${customer.company}</li>
+          <li>Phone: ${customer.phone}</li>
+        </ul>
+      `;
+      });
+
+      document.getElementById('customers').innerHTML = output;
+    }
+  }
+
+  xhr.send();
+}
+
+
+function loadTwo(e) {
+ const xhr = new XMLHttpRequest()
+
+ xhr.open('GET', 'customers.json', true);
+
+ xhr.onload = function() {
+   if (this.status === 200) {
+      const customers = JSON.parse(this.responseText);
+      let output = '';
+      customers.slice(0,2).forEach(function(customer){
+        output += `
+        <ul>
+          <li>ID: ${customer.id}</li>
+          <li>Name: ${customer.name}</li>
+          <li>Company: ${customer.company}</li>
+          <li>Phone: ${customer.phone}</li>
+        </ul>
+        `
+      });
+      document.getElementById('customers').innerHTML = output;
+   }
+ }
+
+ xhr.send();
 }
