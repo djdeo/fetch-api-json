@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue xhr</title>
+</head>
+
+<body>
+    <h1>Get all the customers</h1>
+    <div id="cus">
+        <ul v-for="customer in customers" :key="customer.id">
+            <li>ID: {{customer.id}}</li>
+            <li>Name: {{customer.name}}</li>
+            <li>Company: {{customer.company}}</li>
+            <li>Phone: {{customer.phone}}</li>
+        </ul>
+    </div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="main.js"></script>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue-fetch</title>
+    <style>
+    body {
+        max-width: 960px;
+        margin: 0 auto;
+    }
+
+    p{
+        background-color: aliceblue;
+        padding: 10px;
+
+    }
+    
+    </style>
+</head>
+<body>
+    <div id="app">
+        
+        <div v-for ="post in posts">
+            <h2>
+                {{post.title}}
+            </h2>
+            <p>
+                {{post.body}}
+            </p>
+
+        </div>
+
+        <p>
+            Date: {{date}}
+        </p>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+
+    <script type="text/javascript">
+    new Vue({
+        el: '#app',
+        data: {
+            posts: [],
+            date: '2018-1-11'
+        },
+        created: function () {
+          fetch("/post.json")
+            .then(r => r.json())
+            .then(data => {
+              this.posts=data;
+              console.log(data)
+            });
+        }
+    });
+    </script>
+    
+</body>
+</html>
