@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>load xml data</title>
+</head>
+
+<body>
+    <h1> Load data from sitemap.xml </h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Link</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+        crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            $.get('sitemap.xml', function (d) {
+                $(d).find('url').each(function () {
+                    var $url = $(this);
+                    var loc = $url.find('loc').text();
+                    var lastmod = $url.find('lastmod').text();
+                    var html = '<tr>';
+                    html += '<td> <a href="' + loc + '">' + loc +  '</a> </td>';
+                    html += '<td>' + lastmod + '</td>';
+                    html += '</tr>';
+                    $('table tbody').append($(html));
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
